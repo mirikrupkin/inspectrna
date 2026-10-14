@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InspectRNA: viral RNA structures vs. Boltz-2 predictions</title>
+<style>
+:root{
+  --bg:#ffffff; --panel:#f6f7f9; --text:#1c1f23; --muted:#5f6b7a; --border:#d9dde3;
+  --accent:#2563eb; --row-hover:#eef3ff; --row-sel:#dbe7ff; --viewer-bg:#ffffff;
+  --warn:#b45309; --bad:#b91c1c; --ok:#15803d;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0f1317; --panel:#171c22; --text:#e6e9ee; --muted:#9aa5b4; --border:#2a313a;
+    --accent:#6ea0ff; --row-hover:#1d2530; --row-sel:#26364f; --viewer-bg:#0b0e11;
+    --warn:#fbbf24; --bad:#f87171; --ok:#4ade80;
+  }
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text)}
+a{color:var(--accent)}
+#app{display:grid;grid-template-columns:minmax(340px,31%) 1fr;height:100%}
+#list{display:flex;flex-direction:column;border-right:1px solid var(--border);min-height:0;background:var(--panel)}
+#list header{padding:12px 14px 8px}
+#list h1{font-size:18px;margin:0 0 2px}
+#list .sub{color:var(--muted);font-size:12px}
+#filters{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 14px 10px}
+#filters input[type=search]{grid-column:1/3}
+#filters input,#filters select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font:inherit}
+#filters label{grid-column:1/3;font-size:12px;color:var(--muted);display:flex;gap:6px;align-items:center}
+#count{padding:0 14px 6px;font-size:12px;color:var(--muted)}
+#tablewrap{flex:1;overflow:auto;border-top:1px solid var(--border)}
+table{border-collapse:collapse;width:100%}
+th,td{padding:5px 8px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{position:sticky;top:0;background:var(--panel);cursor:pointer;font-size:12px;border-bottom:1px solid var(--border);user-select:none}
+th .arrow{opacity:.6;font-size:10px}
+tbody tr{cursor:pointer;border-bottom:1px solid var(--border)}
+tbody tr:hover{background:var(--row-hover)}
+tbody tr.sel{background:var(--row-sel)}
+td.fam{text-align:left;color:var(--muted);max-width:120px;overflow:hidden;text-overflow:ellipsis}
+td.flag{color:var(--bad);font-weight:600}
+td.side{font-style:italic}
+#main{display:flex;flex-direction:column;min-width:0;min-height:0}
+#toolbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--panel)}
+#toolbar .grp{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--muted)}
+#toolbar select,#toolbar button{padding:4px 8px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font:inherit;cursor:pointer}
+#viewers{flex:1;display:flex;min-height:260px}
+.pane{flex:1;display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--border)}
+.pane:last-child{border-right:0}
+.pane-title{padding:4px 10px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--border)}
+.vwrap{position:relative;flex:1;min-height:0;background:var(--viewer-bg)}
+#info{border-top:1px solid var(--border);padding:10px 14px;max-height:42%;overflow:auto;background:var(--panel)}
+#info h2{margin:0 0 2px;font-size:16px}
+#info .meta{color:var(--muted);font-size:12px;margin-bottom:6px}
+#metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px 18px;margin:8px 0}
+#metrics div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted var(--border);padding:2px 0}
+#metrics span:first-child{color:var(--muted)}
+.badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;font-weight:600;border:1px solid currentColor}
+.badge.bad{color:var(--bad)} .badge.ok{color:var(--ok)} .badge.warn{color:var(--warn)}
+#legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;margin:6px 0}
+#legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+#notes{color:var(--muted);font-size:12px;margin-top:6px}
+#links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:6px}
+#fatal{padding:24px;color:var(--bad)}
+details{margin-top:8px;color:var(--muted);font-size:12px}
+@media (max-width:900px){
+  #app{grid-template-columns:1fr;grid-template-rows:42vh 1fr;height:auto;min-height:100%}
+  #viewers{min-height:60vh}
+}
+</style>
+</head>
+<body>
+<noscript>This viewer needs JavaScript.</noscript>
+<div id="app">
+  <aside id="list">
+    <header>
+      <h1>InspectRNA</h1>
+      <div class="sub" id="subtitle">Loading…</div>
+    </header>
+    <div id="filters">
+      <input type="search" id="q" placeholder="Search target, family, organism…" aria-label="Search">
+      <select id="fam" aria-label="Family"><option value="">All families</option></select>
+      <select id="grp" aria-label="Analysis group">
+        <option value="">All targets</option>
+        <option value="main">Main analysis</option>
+        <option value="side">Multimer side analysis</option>
+      </select>
+      <label><input type="checkbox" id="flagonly"> Only targets with a large global-vs-US-align gap (ratio &gt; 2)</label>
+    </div>
+    <div id="count"></div>
+    <div id="tablewrap">
+      <table>
+        <thead><tr id="thead"></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div id="toolbar">
+      <div class="grp">View
+        <select id="mode" aria-label="Layout">
+          <option value="side">Side by side (linked)</option>
+          <option value="overlay">Overlay</option>
+        </select>
+      </div>
+      <div class="grp">Color
+        <select id="color" aria-label="Color mode">
+          <option value="plddt">Prediction pLDDT</option>
+          <option value="dev">Deviation from reference</option>
+          <option value="chain">Chain</option>
+          <option value="none">Plain</option>
+        </select>
+      </div>
+      <div class="grp">Style
+        <select id="style" aria-label="Style">
+          <option value="auto">Auto</option>
+          <option value="cartoon">Cartoon</option>
+          <option value="both">Cartoon + sticks</option>
+          <option value="sticks">Sticks</option>
+        </select>
+      </div>
+      <button id="reset" type="button">Reset view</button>
+    </div>
+    <div id="viewers">
+      <div class="pane" id="pane-ref"><div class="pane-title" id="title-ref">Reference (cleaned PDB structure)</div><div class="vwrap" id="v-ref"></div></div>
+      <div class="pane" id="pane-pred"><div class="pane-title">Boltz-2 prediction (fitted onto the reference)</div><div class="vwrap" id="v-pred"></div></div>
+    </div>
+    <div id="info">
+      <h2 id="i-title">Select a target</h2>
+      <div class="meta" id="i-meta">Choose a row on the left. Drag to rotate; in side-by-side mode both views move together.</div>
+      <div id="metrics"></div>
+      <div id="legend"></div>
+      <div id="links"></div>
+      <div id="notes"></div>
+      <details>
+        <summary>How to read these numbers</summary>
+        <p><b>Global RMSD</b>: C1′ atoms over all residues after a least-squares superposition (the same fit that is drawn here). <b>US-align RMSD</b>: from US-align's default, sequence-independent structural alignment over a best-fit subset of residues; residues it pairs are not necessarily the same sequence positions, so it is an optimistic measure. <b>Ratio</b> = global / US-align; a target is flagged when it is above 2. <b>Deviation</b> colors the distance between each predicted residue's C1′ and its reference counterpart (same sequence position). pLDDT is Boltz-2's own per-residue confidence (0 to 100).</p>
+      </details>
+    </div>
+  </main>
+</div>
+
+<script src="viewer/lib/3Dmol-min.js"></script>
+<script>if(!window.$3Dmol){document.write('<script src="https://cdn.jsdelivr.net/npm/3dmol@2.5.5/build/3Dmol-min.js"><\/script>');}</script>
+<script>
+(function(){
+'use strict';
+
+const PLDDT=[[90,'#0053D6','Very high (&gt;90)'],[70,'#65CBF3','Confident (70-90)'],[50,'#FFDB13','Low (50-70)'],[0,'#FF7D45','Very low (&lt;50)']];
+const DEV=[[2,'#2166ac','&le; 2 &Aring;'],[5,'#67a9cf','2-5 &Aring;'],[10,'#fdae61','5-10 &Aring;'],[Infinity,'#d73027','&gt; 10 &Aring;']];
+const CHAIN_COLORS=['#4c78a8','#f58518','#54a24b','#e45756','#72b7b2','#b279a2','#9d755d'];
+const REF_GRAY='#9aa5b4', PLAIN_PRED='#d97706';
+const COLS=[
+  {k:'label',t:'Target',tip:'PDB entry + element name'},
+  {k:'family',t:'Family'},
+  {k:'length_nt',t:'nt'},
+  {k:'global_rmsd',t:'Global Å',tip:'Global RMSD, C1′, all residues'},
+  {k:'usalign_rmsd',t:'US-align Å',tip:'US-align RMSD over its best-fit subset'},
+  {k:'plddt',t:'pLDDT',tip:'Mean Boltz-2 pLDDT'},
+  {k:'ratio',t:'Gap ×',tip:'Global / US-align RMSD; flagged when > 2'}
+];
+
+const $=id=>document.getElementById(id);
+const state={manifest:null,rows:[],view:[],sel:null,cur:null,cache:new Map(),loadId:0,
+  sortKey:'label',sortDir:1,v1:null,v2:null};
+
+function plddtColor(v){for(const [t,c] of PLDDT){if(v>=t)return c;}return PLDDT[PLDDT.length-1][1];}
+function devColor(v){for(const [t,c] of DEV){if(v<=t)return c;}return DEV[DEV.length-1][1];}
+function fmt(x,d){return (x===null||x===undefined||Number.isNaN(x))?'–':Number(x).toFixed(d);}
+function fatal(msg){const d=document.createElement('div');d.id='fatal';d.textContent=msg;document.body.prepend(d);}
+function viewerBg(){return getComputedStyle(document.documentElement).getPropertyValue('--viewer-bg').trim()||'#ffffff';}
+
+async function init(){
+  if(typeof $3Dmol==='undefined'){fatal('The 3D library could not be loaded (viewer/lib/3Dmol-min.js).');return;}
+  try{
+    const r=await fetch('viewer/manifest.json');
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    state.manifest=await r.json();
+  }catch(e){
+    fatal('Could not load viewer/manifest.json ('+e.message+'). If you opened index.html straight from disk, serve the folder instead, e.g. "python3 -m http.server" and open http://localhost:8000.');
+    return;
+  }
+  state.rows=state.manifest.targets;
+  const fams=[...new Set(state.rows.map(r=>r.family))].sort();
+  for(const f of fams){const o=document.createElement('option');o.value=f;o.textContent=f;$('fam').appendChild(o);}
+  const m=state.manifest.meta;
+  $('subtitle').textContent=state.rows.length+' viral RNA structures · '+m.predictor+' predictions · built '+m.generated;
+  buildHeader();
+  for(const id of ['q','fam','grp','flagonly'])$(id).addEventListener('input',applyFilters);
+  $('mode').addEventListener('change',()=>render());
+  $('color').addEventListener('change',()=>render());
+  $('style').addEventListener('change',()=>render());
+  $('reset').addEventListener('click',resetView);
+  window.addEventListener('resize',()=>{resizeViewers();});
+  window.addEventListener('hashchange',()=>{const l=decodeURIComponent(location.hash.slice(1));if(l&&l!==state.sel)select(l,false);});
+  document.addEventListener('keydown',onKey);
+  if(window.matchMedia){const mq=window.matchMedia('(prefers-color-scheme: dark)');
+    const h=()=>{if(state.v1){state.v1.setBackgroundColor(viewerBg());state.v2.setBackgroundColor(viewerBg());state.v1.render();state.v2.render();}};
+    if(mq.addEventListener)mq.addEventListener('change',h);}
+  applyFilters();
+  const start=decodeURIComponent(location.hash.slice(1));
+  const first=state.rows.find(r=>r.label===start)||state.view[0];
+  if(first)select(first.label,false);
+}
+
+function buildHeader(){
+  const tr=$('thead');tr.textContent='';
+  for(const c of COLS){
+    const th=document.createElement('th');th.dataset.k=c.k;if(c.tip)th.title=c.tip;
+    th.innerHTML=c.t+' <span class="arrow"></span>';
+    th.addEventListener('click',()=>{
+      if(state.sortKey===c.k)state.sortDir*=-1;else{state.sortKey=c.k;state.sortDir=(c.k==='label'||c.k==='family')?1:-1;}
+      applyFilters();
+    });
+    tr.appendChild(th);
+  }
+}
+
+function applyFilters(){
+  const q=$('q').value.trim().toLowerCase(),fam=$('fam').value,grp=$('grp').value,fo=$('flagonly').checked;
+  let v=state.rows.filter(r=>{
+    if(fam&&r.family!==fam)return false;
+    if(grp==='main'&&!r.main)return false;
+    if(grp==='side'&&r.main)return false;
+    if(fo&&!r.flag)return false;
+    if(q){const hay=(r.label+' '+r.family+' '+(r.organism||'')).toLowerCase();if(!hay.includes(q))return false;}
+    return true;
+  });
+  const k=state.sortKey,d=state.sortDir;
+  v.sort((a,b)=>{
+    const x=a[k],y=b[k];
+    if(typeof x==='string'||typeof y==='string')return d*String(x||'').localeCompare(String(y||''));
+    const xn=(x===null||x===undefined)?-Infinity:x,yn=(y===null||y===undefined)?-Infinity:y;
+    return d*(xn-yn);
+  });
+  state.view=v;
+  $('count').textContent=v.length+' of '+state.rows.length+' targets';
+  for(const th of $('thead').children){th.querySelector('.arrow').textContent=(th.dataset.k===k)?(d>0?'▲':'▼'):'';}
+  const tb=$('tbody');tb.textContent='';
+  const frag=document.createDocumentFragment();
+  for(const r of v){
+    const tr=document.createElement('tr');tr.dataset.label=r.label;if(r.label===state.sel)tr.className='sel';
+    const cells=[
+      [r.label,r.main?'':'side'],[r.family,'fam'],[r.length_nt,''],[fmt(r.global_rmsd,1),''],[fmt(r.usalign_rmsd,1),''],
+      [(r.plddt===null||r.plddt===undefined)?'–':fmt(r.plddt*100,0),''],[fmt(r.ratio,1),r.flag?'flag':'']
+    ];
+    cells.forEach(([t,cl])=>{const td=document.createElement('td');td.textContent=t;if(cl)td.className=cl;tr.appendChild(td);});
+    if(!r.main)tr.title='Multimer side-analysis target';
+    frag.appendChild(tr);
+  }
+  tb.appendChild(frag);
+}
+$('tbody').addEventListener('click',e=>{const tr=e.target.closest('tr');if(tr)select(tr.dataset.label,true);});
+
+function onKey(e){
+  if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement.tagName))return;
+  if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+  const i=state.view.findIndex(r=>r.label===state.sel);
+  const j=Math.min(state.view.length-1,Math.max(0,i+(e.key==='ArrowDown'?1:-1)));
+  if(state.view[j]){select(state.view[j].label,true);e.preventDefault();}
+}
+
+async function getStructure(label){
+  if(state.cache.has(label))return state.cache.get(label);
+  const r=await fetch('viewer/structures/'+encodeURIComponent(label)+'.json');
+  if(!r.ok)throw new Error('HTTP '+r.status+' for '+label);
+  const s=await r.json();
+  state.cache.set(label,s);
+  if(state.cache.size>12)state.cache.delete(state.cache.keys().next().value);
+  return s;
+}
+
+async function select(label,pushHash){
+  const row=state.rows.find(r=>r.label===label);if(!row)return;
+  state.sel=label;
+  for(const tr of $('tbody').children){tr.classList.toggle('sel',tr.dataset.label===label);if(tr.dataset.label===label)tr.scrollIntoView({block:'nearest'});}
+  if(pushHash)history.replaceState(null,'','#'+encodeURIComponent(label));
+  showInfo(row);
+  const id=++state.loadId;
+  try{
+    const s=await getStructure(label);
+    if(id!==state.loadId)return;
+    state.cur=s;state.curRow=row;
+    render(true);
+  }catch(e){$('notes').textContent='Could not load structure: '+e.message;}
+}
+
+function showInfo(r){
+  $('i-title').textContent=r.label;
+  const rcsb=document.createElement('a');rcsb.href='https://www.rcsb.org/structure/'+r.pdb_id;rcsb.target='_blank';rcsb.rel='noopener';rcsb.textContent='PDB '+r.pdb_id;
+  const meta=$('i-meta');meta.textContent='';
+  meta.append((r.organism||'organism n/a')+' · '+r.family+' · ',rcsb);
+  const rows=[
+    ['Length',r.length_nt+' nt'+(r.oligomeric_state&&r.oligomeric_state!=='monomer'?' ('+r.oligomeric_state+')':'')],
+    ['Global RMSD',fmt(r.global_rmsd,2)+' Å'],
+    ['US-align RMSD',fmt(r.usalign_rmsd,2)+' Å'],
+    ['Global / US-align',fmt(r.ratio,2)+'×'],
+    ['US-align aligned fraction',(r.aligned_fraction===null||r.aligned_fraction===undefined)?'–':fmt(r.aligned_fraction*100,0)+'%'],
+    ['TM-score',fmt(r.tm_score,2)],
+    ['Mean pLDDT',(r.plddt===null||r.plddt===undefined)?'–':fmt(r.plddt*100,0)],
+    ['Analysis group',r.main?'main':'multimer side analysis']
+  ];
+  const m=$('metrics');m.textContent='';
+  for(const [k,v] of rows){const d=document.createElement('div');const a=document.createElement('span');a.textContent=k;const b=document.createElement('span');b.textContent=v;d.append(a,b);m.appendChild(d);}
+  const fl=document.createElement('div');const a=document.createElement('span');a.textContent='Large-gap flag';const b=document.createElement('span');
+  const bd=document.createElement('span');bd.className='badge '+(r.flag?'bad':'ok');bd.textContent=r.flag?'LARGE GAP':'no';b.appendChild(bd);fl.append(a,b);m.appendChild(fl);
+  const L=$('links');L.textContent='';
+  const mk=(href,txt)=>{const x=document.createElement('a');x.href=href;x.textContent=txt;x.target='_blank';x.rel='noopener';L.appendChild(x);};
+  mk('data/pdb/'+encodeURIComponent(r.ref_file),'Reference .cif');
+  mk('data/boltz2/'+encodeURIComponent(r.pred_file),'Prediction .cif');
+  mk('https://www.rcsb.org/structure/'+r.pdb_id,'RCSB entry');
+  const n=[];
+  if(r.other_runs&&r.other_runs.length){
+    n.push('This structure is the "'+r.matched_run+'" run. Other run(s) of the same target: '+
+      r.other_runs.map(o=>o.run+' (global '+fmt(o.global_rmsd,1)+' Å, US-align '+fmt(o.usalign_rmsd,1)+' Å)').join('; ')+
+      '. Global RMSD for replicated targets can differ by many Å between runs.');
+  }
+  if(r.rmsd_check_delta!==null&&r.rmsd_check_delta!==undefined){
+    n.push(r.rmsd_check_delta<0.05?'Check: the structure on screen reproduces the table\'s global RMSD (difference '+fmt(r.rmsd_check_delta,3)+' Å).'
+      :'Warning: the structure on screen differs from the table\'s global RMSD by '+fmt(r.rmsd_check_delta,2)+' Å.');
+  }
+  $('notes').textContent=n.join(' ');
+}
+
+function styleFor(kind,s){
+  const sty=$('style').value;
+  const resolved=sty==='auto'?(s.n_res<=300?'both':'cartoon'):sty;
+  const cf=atom=>colorFor(kind,s,atom);
+  const o={};
+  if(resolved==='cartoon'||resolved==='both')o.cartoon={colorfunc:cf};
+  if(resolved==='sticks'||resolved==='both')o.stick={radius:resolved==='both'?0.12:0.18,colorfunc:cf};
+  return o;
+}
+function chainIdx(s,c){const i=s.chains.findIndex(x=>x.id===c);return i<0?0:i;}
+function colorFor(kind,s,atom){
+  const mode=$('color').value,i=(atom.resi|0)-1,overlay=$('mode').value==='overlay';
+  if(mode==='plddt')return kind==='pred'?plddtColor(s.plddt[i]):REF_GRAY;
+  if(mode==='dev'){if(overlay&&kind==='ref')return REF_GRAY;return devColor(s.dev[i]);}
+  if(mode==='chain')return CHAIN_COLORS[chainIdx(s,atom.chain)%CHAIN_COLORS.length];
+  return kind==='pred'?PLAIN_PRED:REF_GRAY;
+}
+
+function ensureViewers(){
+  if(state.v1)return;
+  const bg=viewerBg();
+  state.v1=$3Dmol.createViewer($('v-ref'),{backgroundColor:bg});
+  state.v2=$3Dmol.createViewer($('v-pred'),{backgroundColor:bg});
+  state.v1.linkViewer(state.v2);state.v2.linkViewer(state.v1);
+}
+function resizeViewers(){try{if(state.v1)state.v1.resize();if(state.v2)state.v2.resize();}catch(e){}}
+
+function render(refit){
+  const s=state.cur;if(!s)return;
+  ensureViewers();
+  const {v1,v2}=state,overlay=$('mode').value==='overlay';
+  $('pane-pred').style.display=overlay?'none':'flex';
+  $('title-ref').textContent=overlay?'Overlay: reference (gray) + Boltz-2 prediction (fitted onto the reference)':'Reference (cleaned PDB structure)';
+  resizeViewers();
+  v1.removeAllModels();v2.removeAllModels();
+  if(overlay){
+    v1.addModel(s.ref,'pdb');v1.addModel(s.pred,'pdb');
+    v1.setStyle({model:0},styleFor('ref',s));v1.setStyle({model:1},styleFor('pred',s));
+  }else{
+    v1.addModel(s.ref,'pdb');v2.addModel(s.pred,'pdb');
+    v1.setStyle({},styleFor('ref',s));v2.setStyle({},styleFor('pred',s));
+  }
+  if(refit!==false){v1.zoomTo();if(!overlay)v2.setView(v1.getView());}
+  v1.render();if(!overlay)v2.render();
+  drawLegend();
+}
+function resetView(){if(!state.v1)return;state.v1.zoomTo();if($('mode').value!=='overlay')state.v2.setView(state.v1.getView());state.v1.render();state.v2.render();}
+
+function drawLegend(){
+  const mode=$('color').value,L=$('legend');L.textContent='';
+  const add=(c,t)=>{const s=document.createElement('span');const i=document.createElement('i');i.style.background=c;s.appendChild(i);const tx=document.createElement('span');tx.innerHTML=t;s.appendChild(tx);L.appendChild(s);};
+  if(mode==='plddt'){PLDDT.forEach(([,c,t])=>add(c,'pLDDT '+t));add(REF_GRAY,'reference');}
+  else if(mode==='dev'){DEV.forEach(([,c,t])=>add(c,t));const s=document.createElement('span');s.style.color='var(--muted)';s.textContent='per-residue C1′ distance to the reference';L.appendChild(s);}
+  else if(mode==='chain'){const s=state.cur;s.chains.forEach((c,i)=>add(CHAIN_COLORS[i%CHAIN_COLORS.length],'chain '+c.id));}
+  else{add(REF_GRAY,'reference');add(PLAIN_PRED,'prediction');}
+}
+
+init();
+})();
+</script>
+</body>
+</html>
