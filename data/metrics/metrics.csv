@@ -1,0 +1,81 @@
+label,pdb_id,family,organism,length_nt,oligomeric_state,main_analysis,matched_run,global_rmsd_A,usalign_rmsd_A,global_over_usalign,large_gap_flag,usalign_aligned_fraction,tm_score,mean_plddt_0to1,n_other_runs,other_runs_global_rmsd_A,reference_file,prediction_file
+1A60_Pseudoknot_other,1A60,Pseudoknot (other),Turnip yellow mosaic virus,44,monomer,True,bundle4,6.86,3.77,1.82,False,0.773,0.197,0.742,0,,1A60_Pseudoknot_other_copyA.cif,1A60_Pseudoknot_other_superposed.cif
+1ATO_Ribozyme,1ATO,Ribozyme,Hepatitis delta virus,19,monomer,True,bundle6,2.85,1.39,2.05,True,0.895,0.264,0.877,0,,1ATO_Ribozyme_copyA.cif,1ATO_Ribozyme_superposed.cif
+1BVJ_5_UTR_SL_element,1BVJ,5' UTR / SL element,Human immunodeficiency virus type 1 (MAL ISOLATE),23,monomer,True,bundle6,1.51,1.41,1.07,False,1.0,0.334,0.884,0,,1BVJ_5_UTR_SL_element_copyA.cif,1BVJ_5_UTR_SL_element_superposed.cif
+1E95_Frameshift_pseudoknot,1E95,Frameshift/pseudoknot,SIMIAN RETROVIRUS 1,36,monomer,True,bundle6,3.64,2.96,1.23,False,0.944,0.285,0.723,0,,1E95_Frameshift_pseudoknot_copyA.cif,1E95_Frameshift_pseudoknot_superposed.cif
+1FOQ_Phage_RNA_5mer,1FOQ,Phage RNA,Bacillus phage phi29,545,5-mer,False,bundle3,55.15,3.65,15.11,True,0.117,0.391,0.645,0,,1FOQ_Phage_RNA_5mer_copyABCDE.cif,1FOQ_Phage_RNA_5mer_superposed.cif
+1FOQ_Phage_RNA_monomer,1FOQ,Phage RNA,Bacillus phage phi29,109,monomer,True,bundle3,22.12,3.22,6.87,True,0.578,0.423,0.759,0,,1FOQ_Phage_RNA_monomer_copyA.cif,1FOQ_Phage_RNA_monomer_superposed.cif
+1LVJ_TAR,1LVJ,TAR,Human immunodeficiency virus 1,31,monomer,True,bundle6,6.34,3.33,1.9,False,0.742,0.163,0.758,0,,1LVJ_TAR_copyA.cif,1LVJ_TAR_superposed.cif
+1RFR_5_UTR_SL_element,1RFR,5' UTR / SL element,Human coxsackievirus B3,30,monomer,True,bundle6,2.71,2.19,1.24,False,0.967,0.325,0.859,0,,1RFR_5_UTR_SL_element_copyA.cif,1RFR_5_UTR_SL_element_superposed.cif
+1Y0Q_Ribozyme,1Y0Q,Ribozyme,Staphylococcus phage Twort,229,monomer,True,bundle3,1.26,1.29,0.98,False,1.0,0.965,0.843,1,1.29,1Y0Q_Ribozyme_copyA.cif,1Y0Q_Ribozyme_superposed.cif
+2KRL_3_UTR,2KRL,3' UTR,Turnip crinkle virus,102,monomer,True,bundle3,20.45,4.75,4.31,True,0.382,0.2,0.511,0,,2KRL_3_UTR_copyA.cif,2KRL_3_UTR_superposed.cif
+2KTZ_IRES,2KTZ,IRES,Hepatitis C virus,38,monomer,True,bundle4,6.35,1.85,3.43,True,0.684,0.393,0.901,0,,2KTZ_IRES_copyA.cif,2KTZ_IRES_superposed.cif
+2LC8_Frameshift_pseudoknot,2LC8,Frameshift/pseudoknot,Moloney murine leukemia virus,56,monomer,True,bundle3,11.69,2.7,4.33,True,0.714,0.348,0.588,0,,2LC8_Frameshift_pseudoknot_copyA.cif,2LC8_Frameshift_pseudoknot_superposed.cif
+2LDL_exon_splicing_silencer,2LDL,exon splicing silencer,Human immunodeficiency virus 1,27,monomer,True,bundle6,2.63,1.67,1.57,False,0.963,0.398,0.761,0,,2LDL_exon_splicing_silencer_copyA.cif,2LDL_exon_splicing_silencer_superposed.cif
+2MFD_5_UTR_IRES,2MFD,5' UTR / IRES,Bovine enterovirus type 1,19,monomer,True,bundle6,3.45,2.24,1.54,False,0.895,0.23,0.84,0,,2MFD_5_UTR_IRES_copyA.cif,2MFD_5_UTR_IRES_superposed.cif
+2MQT_PBS,2MQT,PBS,Murine Leukemia Virus,68,monomer,True,bundle3,4.29,3.83,1.12,False,0.882,0.41,0.773,0,,2MQT_PBS_copyA.cif,2MQT_PBS_superposed.cif
+2N1Q_Packaging_signal,2N1Q,Packaging signal,Human immunodeficiency virus 1,155,monomer,True,bundle3,27.76,4.54,6.11,True,0.535,0.346,0.449,1,34.7,2N1Q_Packaging_signal_copyA.cif,2N1Q_Packaging_signal_superposed.cif
+3T4B_IRES,3T4B,IRES,"synthetic construct, Hepatitis C virus ED43",83,monomer,True,bundle3,1.75,1.73,1.01,False,1.0,0.787,0.841,0,,3T4B_IRES_copyA.cif,3T4B_IRES_superposed.cif
+4C4Q_IRES,4C4Q,IRES,CLASSICAL SWINE FEVER VIRUS,233,monomer,True,bundle3,34.91,5.11,6.83,True,0.395,0.275,0.46,1,36.23,4C4Q_IRES_copyA.cif,4C4Q_IRES_superposed.cif
+4P5J_tRNA_like,4P5J,tRNA-like,Turnip yellow mosaic virus,83,monomer,True,bundle3,4.62,3.02,1.53,False,0.916,0.558,0.785,0,,4P5J_tRNA_like_copyA.cif,4P5J_tRNA_like_superposed.cif
+4PQV_xrRNA,4PQV,xrRNA,Murray Valley encephalitis virus,68,monomer,True,bundle3,19.17,3.46,5.54,True,0.412,0.271,0.441,0,,4PQV_xrRNA_copyA.cif,4PQV_xrRNA_superposed.cif
+5UF3_Phage_RNA,5UF3,Phage RNA,Enterobacteria phage GA,23,monomer,True,bundle6,2.51,2.95,0.85,False,0.913,0.28,0.794,0,,5UF3_Phage_RNA_copyA.cif,5UF3_Phage_RNA_superposed.cif
+5V16_IRES,5V16,IRES,Enterovirus A71,41,monomer,True,bundle4,4.37,1.33,3.29,True,0.732,0.54,0.739,0,,5V16_IRES_copyA.cif,5V16_IRES_superposed.cif
+6D3P_xrRNA,6D3P,xrRNA,Sweet clover necrotic mosaic virus,45,monomer,True,bundle4,8.94,2.1,4.26,True,0.867,0.53,0.757,0,,6D3P_xrRNA_copyA.cif,6D3P_xrRNA_superposed.cif
+6JJH_G_quadruplex,6JJH,G-quadruplex,Pseudorabies virus Ea,14,monomer,True,bundle6,8.46,0.66,12.82,True,0.286,0.101,0.604,0,,6JJH_G_quadruplex_copyA.cif,6JJH_G_quadruplex_superposed.cif
+6JXM_prohead_RNA_pRNA,6JXM,prohead RNA (pRNA),Bacillus virus phi29,97,monomer,True,bundle3,2.15,1.87,1.15,False,0.99,0.817,0.843,0,,6JXM_prohead_RNA_pRNA_copyA.cif,6JXM_prohead_RNA_pRNA_superposed.cif
+6MJ0_3_UTR_dimer,6MJ0,3' UTR,Turnip yellow mosaic virus,202,dimer,False,bundle3,32.01,2.55,12.55,True,0.391,0.578,0.596,0,,6MJ0_3_UTR_dimer_copyAB.cif,6MJ0_3_UTR_dimer_superposed.cif
+6MJ0_3_UTR_monomer,6MJ0,3' UTR,Turnip yellow mosaic virus,101,monomer,True,bundle3,15.48,3.16,4.9,True,0.713,0.495,0.649,0,,6MJ0_3_UTR_monomer_copyA.cif,6MJ0_3_UTR_monomer_superposed.cif
+6OL3_viral_non_coding_RNA_inhibiting_PKR,6OL3,viral non-coding RNA inhibiting PKR,Human adenovirus 2,111,monomer,True,bundle3,3.96,2.79,1.42,False,0.937,0.688,0.722,0,,6OL3_viral_non_coding_RNA_inhibiting_PKR_copyA.cif,6OL3_viral_non_coding_RNA_inhibiting_PKR_superposed.cif
+6U79_5_UTR_SL_element,6U79,5' UTR / SL element,West Nile virus,37,monomer,True,bundle4,2.78,2.53,1.1,False,0.973,0.356,0.836,0,,6U79_5_UTR_SL_element_copyA.cif,6U79_5_UTR_SL_element_superposed.cif
+6VAR_epsilon,6VAR,epsilon,Hepatitis B virus,61,monomer,True,bundle3,13.3,2.91,4.57,True,0.525,0.293,0.661,0,,6VAR_epsilon_copyA.cif,6VAR_epsilon_superposed.cif
+6VU1_TAR,6VU1,TAR,Human immunodeficiency virus 1,33,monomer,True,bundle6,2.15,1.56,1.38,False,0.97,0.502,0.854,0,,6VU1_TAR_copyA.cif,6VU1_TAR_superposed.cif
+6VVJ_TPUA,6VVJ,TPUA,Human immunodeficiency virus 1,129,monomer,True,bundle3,19.41,4.12,4.71,True,0.705,0.424,0.563,0,,6VVJ_TPUA_copyA.cif,6VVJ_TPUA_superposed.cif
+6W3M_5_UTR_SL_element,6W3M,5' UTR / SL element,Dengue virus 4 Philippines/H241/1956,41,monomer,True,bundle4,3.01,2.51,1.2,False,0.927,0.486,0.816,0,,6W3M_5_UTR_SL_element_copyA.cif,6W3M_5_UTR_SL_element_superposed.cif
+7DD4_TAR,7DD4,TAR,Human immunodeficiency virus 1,36,monomer,True,bundle6,4.61,2.37,1.95,False,0.694,0.292,0.807,1,3.97,7DD4_TAR_copyA.cif,7DD4_TAR_superposed.cif
+7JJU_xrRNA_dimer,7JJU,xrRNA,Potato leafroll virus,98,dimer,False,bundle4,31.99,1.92,16.66,True,0.163,0.239,0.518,0,,7JJU_xrRNA_dimer_copyAB.cif,7JJU_xrRNA_dimer_superposed.cif
+7JJU_xrRNA_monomer,7JJU,xrRNA,Potato leafroll virus,49,monomer,True,bundle4,14.22,2.72,5.23,True,0.633,0.3,0.635,0,,7JJU_xrRNA_monomer_copyA.cif,7JJU_xrRNA_monomer_superposed.cif
+7K16_xrRNA,7K16,xrRNA,Tamana bat virus,51,monomer,True,bundle4,9.1,3.45,2.64,True,0.627,0.357,0.604,0,,7K16_xrRNA_copyA.cif,7K16_xrRNA_superposed.cif
+7KGA_dumbbell_dimer,7KGA,dumbbell,Donggang virus,179,dimer,False,bundle3,4.53,2.92,1.55,False,0.436,0.6,0.523,0,,7KGA_dumbbell_dimer_chainAB.cif,7KGA_dumbbell_dimer_superposed.cif
+7KGA_dumbbell_monomer,7KGA,dumbbell,Donggang virus,89,monomer,True,bundle3,9.46,2.8,3.38,True,0.831,0.558,0.572,0,,7KGA_dumbbell_monomer_copyA.cif,7KGA_dumbbell_monomer_superposed.cif
+7LVA_PBS,7LVA,PBS,Human immunodeficiency virus 1,103,monomer,True,bundle3,19.67,4.36,4.51,True,0.408,0.249,0.493,0,,7LVA_PBS_copyA.cif,7LVA_PBS_superposed.cif
+7LYF_5_UTR_SL_element,7LYF,5' UTR / SL element,"Dengue virus 2, Dengue virus 2, Dengue virus 2",139,monomer,True,bundle3,2.42,2.29,1.06,False,0.993,0.827,0.759,0,,7LYF_5_UTR_SL_element_copyA.cif,7LYF_5_UTR_SL_element_superposed.cif
+7LYG_5_UTR_SL_element,7LYG,5' UTR / SL element,"Zika virus, Zika virus, Zika virus",142,monomer,True,bundle3,14.51,2.99,4.85,True,0.739,0.572,0.625,0,,7LYG_5_UTR_SL_element_copyA.cif,7LYG_5_UTR_SL_element_superposed.cif
+7PS8_G_quadruplex,7PS8,G-quadruplex,HIV-1 06TG.HT008,23,monomer,True,bundle6,11.11,2.47,4.5,True,0.391,0.104,0.55,0,,7PS8_G_quadruplex_copyA.cif,7PS8_G_quadruplex_superposed.cif
+7RQ5_SL_element_switch,7RQ5,SL element/switch,Influenza A virus,19,monomer,True,bundle6,5.55,1.73,3.21,True,0.789,0.438,0.812,0,,7RQ5_SL_element_switch_copyA.cif,7RQ5_SL_element_switch_superposed.cif
+7SAM_tRNA_like,7SAM,tRNA-like,Brome mosaic virus,169,monomer,True,bundle3,25.37,4.45,5.7,True,0.473,0.321,0.43,1,19.08,7SAM_tRNA_like_copyA.cif,7SAM_tRNA_like_superposed.cif
+7U4A_xrRNA,7U4A,xrRNA,Zika virus,70,monomer,True,bundle3,7.69,2.65,2.9,True,0.8,0.467,0.589,0,,7U4A_xrRNA_copyA.cif,7U4A_xrRNA_superposed.cif
+7UMC_5_UTR_SL_element,7UMC,5' UTR / SL element,Dengue virus 1,70,monomer,True,bundle3,10.99,4.04,2.72,True,0.8,0.314,0.742,0,,7UMC_5_UTR_SL_element_copyA.cif,7UMC_5_UTR_SL_element_superposed.cif
+7UMD_5_UTR_SL_element,7UMD,5' UTR / SL element,Dengue virus 1,40,monomer,True,bundle4,5.94,3.14,1.89,False,0.825,0.291,0.755,0,,7UMD_5_UTR_SL_element_copyA.cif,7UMD_5_UTR_SL_element_superposed.cif
+7UME_5_UTR_SL_element,7UME,5' UTR / SL element,Dengue virus 1,28,monomer,True,bundle6,2.58,1.78,1.45,False,0.929,0.429,0.886,0,,7UME_5_UTR_SL_element_copyA.cif,7UME_5_UTR_SL_element_superposed.cif
+8BWT_5_UTR_SL_element,8BWT,5' UTR / SL element,Severe acute respiratory syndrome coronavirus 2,26,monomer,True,bundle6,3.05,2.34,1.3,False,0.923,0.236,0.851,0,,8BWT_5_UTR_SL_element_copyA.cif,8BWT_5_UTR_SL_element_superposed.cif
+8CQ1_5_UTR_SL_element,8CQ1,5' UTR / SL element,Severe acute respiratory syndrome coronavirus 2,44,monomer,True,bundle4,2.35,2.23,1.05,False,1.0,0.493,0.765,0,,8CQ1_5_UTR_SL_element_copyA.cif,8CQ1_5_UTR_SL_element_superposed.cif
+8QO2_5_UTR_SL_element,8QO2,5' UTR / SL element,Human coronavirus OC43,222,monomer,True,bundle3,47.32,4.43,10.68,True,0.378,0.289,0.465,1,26.14,8QO2_5_UTR_SL_element_copyA.cif,8QO2_5_UTR_SL_element_superposed.cif
+8QO3_5_UTR_SL_element,8QO3,5' UTR / SL element,Rousettus bat coronavirus GCCDC1,118,monomer,True,bundle3,21.24,3.61,5.88,True,0.593,0.395,0.653,0,,8QO3_5_UTR_SL_element_copyA.cif,8QO3_5_UTR_SL_element_superposed.cif
+8QO4_5_UTR_SL_element,8QO4,5' UTR / SL element,Middle East respiratory syndrome-related coronavirus,156,monomer,True,bundle3,18.92,4.18,4.53,True,0.596,0.402,0.538,1,19.91,8QO4_5_UTR_SL_element_copyA.cif,8QO4_5_UTR_SL_element_superposed.cif
+8QO5_5_UTR_SL_element,8QO5,5' UTR / SL element,Severe acute respiratory syndrome coronavirus 2,145,monomer,True,bundle3,19.44,3.76,5.17,True,0.6,0.428,0.562,1,28.38,8QO5_5_UTR_SL_element_copyA.cif,8QO5_5_UTR_SL_element_superposed.cif
+8S95_tRNA_like,8S95,tRNA-like,"Homo sapiens, Poliovirus 1, Homo sapiens",146,monomer,True,bundle3,24.19,2.58,9.38,True,0.671,0.555,0.696,1,7.04,8S95_tRNA_like_copyA.cif,8S95_tRNA_like_superposed.cif
+8TJQ_xrRNA,8TJQ,xrRNA,"Zika virus, Tetrahymena, Zika virus",433,monomer,True,bundle3,21.9,3.05,7.18,True,0.82,0.761,0.635,1,19.65,8TJQ_xrRNA_copyA.cif,8TJQ_xrRNA_superposed.cif
+8TQX_5_UTR_SL_element_dimer,8TQX,5' UTR / SL element,Zika virus,38,dimer,False,bundle6,1.44,1.63,0.88,False,0.5,0.274,0.831,0,,8TQX_5_UTR_SL_element_dimer_copyAB.cif,8TQX_5_UTR_SL_element_dimer_superposed.cif
+8TQX_5_UTR_SL_element_monomer,8TQX,5' UTR / SL element,Zika virus,19,monomer,True,bundle6,16.21,1.3,12.47,True,0.526,0.316,0.859,0,,8TQX_5_UTR_SL_element_monomer_copyA.cif,8TQX_5_UTR_SL_element_monomer_superposed.cif
+8TSV_5_UTR_SL_element_monomer,8TSV,5' UTR / SL element,Zika virus,25,monomer,True,bundle6,21.13,1.93,10.95,True,0.56,0.174,0.862,0,,8TSV_5_UTR_SL_element_monomer_copyA.cif,8TSV_5_UTR_SL_element_monomer_superposed.cif
+8TSV_5_UTR_SL_element_tetramer,8TSV,5' UTR / SL element,Zika virus,100,tetramer,False,bundle6,29.22,2.35,12.43,True,0.23,0.21,0.801,0,,8TSV_5_UTR_SL_element_tetramer_copyABCD.cif,8TSV_5_UTR_SL_element_tetramer_superposed.cif
+8U3M_TAR,8U3M,TAR,Human immunodeficiency virus 1,31,monomer,True,bundle6,5.51,2.68,2.06,True,0.742,0.241,0.814,0,,8U3M_TAR_copyA.cif,8U3M_TAR_superposed.cif
+8UTG_G_quadruplex_dimer,8UTG,G-quadruplex,West Nile virus strain NY-99,42,dimer,False,bundle6,20.65,3.5,5.9,True,0.19,0.12,0.771,0,,8UTG_G_quadruplex_dimer_copyAB.cif,8UTG_G_quadruplex_dimer_superposed.cif
+8UTG_G_quadruplex_monomer,8UTG,G-quadruplex,West Nile virus strain NY-99,21,monomer,True,bundle6,10.52,3.13,3.36,True,0.429,0.12,0.559,0,,8UTG_G_quadruplex_monomer_copyA.cif,8UTG_G_quadruplex_monomer_superposed.cif
+8UYE_5_UTR_SL_element,8UYE,5' UTR / SL element,Pipistrellus bat coronavirus HKU5,135,monomer,True,bundle3,16.87,3.72,4.53,True,0.504,0.359,0.536,0,,8UYE_5_UTR_SL_element_copyA.cif,8UYE_5_UTR_SL_element_superposed.cif
+8VCI_Frameshift_pseudoknot,8VCI,Frameshift/pseudoknot,Severe acute respiratory syndrome coronavirus 2,118,monomer,True,bundle3,20.48,3.27,6.26,True,0.559,0.396,0.56,0,,8VCI_Frameshift_pseudoknot_copyA.cif,8VCI_Frameshift_pseudoknot_superposed.cif
+9BLM_5_UTR_SL_element,9BLM,5' UTR / SL element,West Nile virus,67,monomer,True,bundle3,5.74,2.42,2.37,True,0.94,0.571,0.759,0,,9BLM_5_UTR_SL_element_copyA.cif,9BLM_5_UTR_SL_element_superposed.cif
+9CFN_xrRNA_dimer,9CFN,xrRNA,Beet western yellows ST9 associated virus,55,monomer,False,bundle3,12.36,2.62,4.72,True,0.473,0.305,0.489,0,,9CFN_xrRNA_dimer_copyA.cif,9CFN_xrRNA_dimer_superposed.cif
+9CFN_xrRNA_monomer,9CFN,xrRNA,Beet western yellows ST9 associated virus,55,monomer,True,bundle3,10.12,2.05,4.94,True,0.509,0.352,0.499,0,,9CFN_xrRNA_monomer_copyA.cif,9CFN_xrRNA_monomer_superposed.cif
+9DE7_TAR,9DE7,TAR,Human immunodeficiency virus 1,57,monomer,True,bundle4,2.78,2.34,1.19,False,0.982,0.545,0.807,0,,9DE7_TAR_copyA.cif,9DE7_TAR_superposed.cif
+9DIB_Frameshift_pseudoknot_dimer,9DIB,Frameshift/pseudoknot,Rous sarcoma virus - Prague C,200,dimer,False,bundle3,33.95,4.58,7.41,True,0.26,0.26,0.432,0,,9DIB_Frameshift_pseudoknot_dimer_chainAB.cif,9DIB_Frameshift_pseudoknot_dimer_superposed.cif
+9DIB_Frameshift_pseudoknot_monomer,9DIB,Frameshift/pseudoknot,Rous sarcoma virus - Prague C,96,monomer,True,bundle3,23.89,4.19,5.7,True,0.344,0.233,0.471,0,,9DIB_Frameshift_pseudoknot_monomer_copyA.cif,9DIB_Frameshift_pseudoknot_monomer_superposed.cif
+9DP9_xrRNA,9DP9,xrRNA,Powassan virus,440,monomer,True,bundle3,16.99,3.0,5.66,True,0.861,0.805,0.62,1,17.54,9DP9_xrRNA_copyA.cif,9DP9_xrRNA_superposed.cif
+9EOW_5_UTR_SL_element,9EOW,5' UTR / SL element,Severe acute respiratory syndrome coronavirus 2,29,monomer,True,bundle6,3.87,2.58,1.5,False,0.828,0.22,0.742,0,,9EOW_5_UTR_SL_element_copyA.cif,9EOW_5_UTR_SL_element_superposed.cif
+9FM4_5_UTR_SL_element,9FM4,5' UTR / SL element,Severe acute respiratory syndrome coronavirus 2,25,monomer,True,bundle6,4.25,2.93,1.45,False,0.96,0.234,0.828,0,,9FM4_5_UTR_SL_element_copyA.cif,9FM4_5_UTR_SL_element_superposed.cif
+9KGG_Phage_RNA,9KGG,Phage RNA,Escherichia phage T4,267,monomer,True,bundle3,36.39,5.19,7.01,True,0.427,0.315,0.386,1,35.78,9KGG_Phage_RNA_copyA.cif,9KGG_Phage_RNA_superposed.cif
+9LHK_GOLLD,9LHK,GOLLD,uncultured Caudovirales phage,787,monomer,True,bundle3,70.62,7.39,9.56,True,0.22,0.181,0.291,1,73.69,9LHK_GOLLD_copyA.cif,9LHK_GOLLD_superposed.cif
+9OD4_Transcriptional_Regulatory_Signal,9OD4,Transcriptional Regulatory Signal,Ebola virus,23,monomer,True,bundle6,2.02,1.7,1.19,False,1.0,0.351,0.959,0,,9OD4_Transcriptional_Regulatory_Signal_copyA.cif,9OD4_Transcriptional_Regulatory_Signal_superposed.cif
+9QZJ_5_UTR_SL_element,9QZJ,5' UTR / SL element,Severe acute respiratory syndrome coronavirus,19,monomer,True,bundle6,3.51,2.53,1.39,False,0.895,0.177,0.854,0,,9QZJ_5_UTR_SL_element_copyA.cif,9QZJ_5_UTR_SL_element_superposed.cif
+9W1L_5_UTR_SL_element,9W1L,5' UTR / SL element,Hepatitis C virus (isolate 1),26,monomer,True,bundle6,6.99,1.58,4.42,True,0.577,0.225,0.686,0,,9W1L_5_UTR_SL_element_copyA.cif,9W1L_5_UTR_SL_element_superposed.cif
